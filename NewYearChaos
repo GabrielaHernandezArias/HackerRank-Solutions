@@ -1,0 +1,54 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the minimumBribes function below.
+    static void minimumBribes(int[] q) {
+        
+        int numBribes = 0;
+
+        // loop from the back through this bribed array named q
+        for (int i=q.length-1; i>=0; i--){
+
+        // CASE A: If bribe happened
+            if (q[i] != i+1){
+                
+                // CASE A1: 1 bribe
+                if ( q[i-1] == i+1 && (i-1)>=0 ){      // check bounds
+                    // swap
+                    int temp = q[i-1]; // 6
+                    q[i-1] = q[i];  // 6 is now 8
+                    q[i] = temp;  // 8 is now 6 
+                    numBribes++;
+                }
+                
+                // CASE A2: 2 bribes
+                else if ( q[i-2] == i+1 && (i-2)>=0){
+                    // swap
+                    int temp = q[i-2];
+                    q[i-2]=q[i-1];
+                    q[i-1]=temp;
+                    
+                    int tempT = q[i-1];
+                    q[i-1]=q[i];
+                    q[i]=tempT;
+                    
+                    numBribes+=2;
+                }
+                
+                // CASE A3: too many bribes
+                else {
+                System.out.println("Too chaotic");
+                 return;   
+                }
+            }
+        // CASE B: No bribes happened
+    }
+    System.out.println(numBribes);
+    }
